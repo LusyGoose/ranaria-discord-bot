@@ -438,4 +438,19 @@ async function recoverTempVoiceChannels(guild) {
     }
 }
 
-client.login(process.env.DISCORD_TOKEN);
+const crypto = require('crypto');
+
+const token = process.env.DISCORD_TOKEN;
+
+console.log('========== TOKEN CHECK ==========');
+console.log('exists:', !!token);
+console.log('length:', token ? token.length : null);
+console.log(
+    'hash:',
+    token
+        ? crypto.createHash('sha256').update(token).digest('hex')
+        : null
+);
+console.log('=================================');
+
+client.login(token);
